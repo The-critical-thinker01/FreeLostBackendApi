@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://fredy:fredy@94.176.234.8:27017/freelost', {
+mongoose.connect('mongodb+srv://fredy:Devesky123@cluster0.tvkw4.mongodb.net/freelost?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
     .then(() => {
-        console.log('conected');
+        console.log('connecter a la base de donnee');
     }).catch(err => {
         console.log(err);
     })
