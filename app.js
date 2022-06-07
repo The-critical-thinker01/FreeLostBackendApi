@@ -4,14 +4,18 @@ const morgan = require('morgan');
 const index = require('./routes');
 require('./database');
 const path = require('path');
+const cors = require('cors'); // pour permettre a mon backend d'accpeter les requettes cross origine
 
-//juste une vue pour la page home de notre api,
-//pour faire une petite doc
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+exports.app = app;
+require('./config/session.config');
+require('./config/passport.config');
 
 
+app.set('views', path.join(__dirname, 'views')); //je specifie le dossier des vus
+app.set('view engine', 'pug'); // je specifie le moteur de vu 
 
+
+app.use(cors());
 app.use(morgan('short'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
