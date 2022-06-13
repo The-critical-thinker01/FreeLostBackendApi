@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const userSchema = schema({
+const objectSchema = schema({
     nom_obj: { type: String, required: true, unique: true },
     photo_obj: { type: String, required: true, unique: true },
     categorie: { type: String, required: true },
