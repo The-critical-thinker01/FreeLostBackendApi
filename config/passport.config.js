@@ -50,7 +50,7 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async(email,
     }))
     //null parce que l'erreur ne vient pas du serveur mais de l'utilisateur qui n'a pas rentré 
     //un identifiant correct, false car nous n'avons pas de user et un objet que nous pourrons 
-    //utiliser pour afficher une erreur.
+    //utiliser pour afficher une erreur  .
 
 
 
