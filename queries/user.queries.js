@@ -19,3 +19,6 @@ exports.createUser = async(user) => {
 exports.findUserPerEmail = async(email) => {
     return User.findOne({ 'email': email }).exec();
 }
+exports.findUserPerGoogleId = (googleId) => {
+    return User.findOne({ 'googleId': googleId }).exec();
+}
