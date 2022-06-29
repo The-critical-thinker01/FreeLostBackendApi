@@ -1,6 +1,8 @@
 const { app } = require('../app');
 const passport = require('passport');
 const User = require("../database/models/user.model");
+const Category =require("../database/models/category.model");
+const {findCategoryPerName} = require('../queries/category.queries');
 const { findUserPerEmail } = require('../queries/user.queries');
 const LocalStrategy = require('passport-local').Strategy;
 
