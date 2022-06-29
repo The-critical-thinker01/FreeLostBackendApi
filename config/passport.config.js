@@ -58,7 +58,7 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async(email,
 
 
     passport.use('google', new GoogleStrategy({
-        clientID: '698659596036-1in4gcvpucuibc0p6bo6pvodkbssnc03.apps.googleusercontent.com',
+        clientID: '698659596036-qcoertuq60f6j5q1lnns5c7ci3kv4dic.apps.googleusercontent.com',
         clientSecret: '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',
         callbackURL: '/auth/google/cb'
     }, async(accessToken, refreshToken, profile, done) => {
