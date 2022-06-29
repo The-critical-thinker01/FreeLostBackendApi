@@ -7,10 +7,9 @@ const authRoutes = require('./auth.routes')
 router.use('/users', userRoutes);
 router.use('/auth', authRoutes);
 
-
-router.get('/', (req, res) => {
-    res.render('home');
-});
+router.get('/',(req,res)=>{
+    res.render('index');
+})
 
 
 

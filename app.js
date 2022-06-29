@@ -5,20 +5,19 @@ const index = require('./routes');
 require('./database');
 const path = require('path');
 const cors = require('cors'); // pour permettre a mon backend d'accpeter les requettes cross origine
-
 exports.app = app;
 require('./config/session.config');
 require('./config/passport.config');
 
-
-app.set('views', path.join(__dirname, 'views')); //je specifie le dossier des vus
-app.set('view engine', 'pug'); // je specifie le moteur de vu 
-
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.use(cors());
 app.use(morgan('short'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(index);
+
 
 app.listen(3005);
