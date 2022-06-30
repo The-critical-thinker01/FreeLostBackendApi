@@ -1,11 +1,16 @@
-const { listObjects } = require('../queries/object.queries');
+const mongoose = require('mongoose');
 
+const { ObjectSchema } = require('../database/models/object.model');
 
-exports.objectList = async(req, res, next) => {
-    try {
-        const object = await listObjects();
-        res.json(objects);
-    } catch (e) {
-        next(e);
-    }
-}
+const Object = mongoose.model('Object',ObjectSchema);
+
+exports.addNewObject = (req, res) => {
+    let NewObject = new Object(req.body);
+
+    NewObject.save((err, Object) =>{
+        if(err) {
+            res.send(err);
+        }
+        res.json(Object);
+    });
+};

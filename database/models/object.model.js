@@ -1,14 +1,13 @@
-const mongoose = require("mongoose");
-const schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const objectSchema = schema({
-    nom_obj: { type: String, required: true, unique: true },
-    photo_obj: { type: String, required: true, unique: true },
-    categorie: { type: String, required: true },
-    centre_collecte: { type: String }
+ const ObjectSchema = new Schema({
+    nomObjet: { type: String, required: true, unique: true },
+    photo: { type: String, required: true, unique: true },
+    Categorie: { type: Number, required: true },
+    CentreDeCollecte: { type: Number, require: true },
 });
 
-
-const Object = mongoose.model("object", objectSchema);
+const Object = mongoose.model("Object", ObjectSchema);
 
 module.exports = Object;
