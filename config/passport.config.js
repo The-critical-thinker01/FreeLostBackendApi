@@ -4,6 +4,8 @@ const User = require("../database/models/user.model");
 const { findUserPerEmail ,findUserPerGoogleId} = require('../queries/user.queries');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy=require('passport-facebook').Strategy;
+const InstagramStrategy=require('passport-instagram').Strategy;
 
 
 
@@ -60,7 +62,7 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async(email,
     passport.use('google', new GoogleStrategy({
         clientID: '698659596036-qcoertuq60f6j5q1lnns5c7ci3kv4dic.apps.googleusercontent.com',
         clientSecret: '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',
-        callbackURL: '/auth/google/cb'
+        callbackURL: 'https://freelost-api.kouelab.com/auth/google/cb'
     }, async(accessToken, refreshToken, profile, done) => {
         console.log(profile);
         try {
@@ -81,4 +83,60 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async(email,
         } catch (e) {
             done(e);
         }
+    }))
+
+
+
+
+    passport.use('facebook', new FacebookStrategy({
+        clientID: '406594058080060',
+        clientSecret: '518a890477f63f6cd40a699b8f8047bd',
+        callbackURL: "http://localhost:3005/auth/facebook/callback"
+    }, async(accessToken, refreshToken, profile, done) => {
+        console.log(profile);
+        // try {
+        //     const user = await findUserPerGoogleId(profile.id);
+        //     if (user) {
+        //         done(null, user);
+        //     } else {
+        //         const newUser = new User({
+        //             username: profile.displayName,
+        //             googleId: profile.id,
+        //             email: profile.emails[0].value,
+        //             avatar:profile.photos[0].value
+                    
+        //         });
+        //         const savedUser = await newUser.save();
+        //         done(null, savedUser);
+        //     }
+        // } catch (e) {
+        //     done(e);
+        // }
+    }))
+
+
+    passport.use('instagram', new InstagramStrategy({
+        clientID: '743013947041868',
+        clientSecret: '575b6391545f4e098b898730276d96e5',
+        callbackURL: "http://localhost:3005/auth/instagram/callback"
+    }, async(accessToken, refreshToken, profile, done) => {
+        console.log(profile);
+        // try {
+        //     const user = await findUserPerGoogleId(profile.id);
+        //     if (user) {
+        //         done(null, user);
+        //     } else {
+        //         const newUser = new User({
+        //             username: profile.displayName,
+        //             googleId: profile.id,
+        //             email: profile.emails[0].value,
+        //             avatar:profile.photos[0].value
+                    
+        //         });
+        //         const savedUser = await newUser.save();
+        //         done(null, savedUser);
+        //     }
+        // } catch (e) {
+        //     done(e);
+        // }
     }))
