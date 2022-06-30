@@ -15,7 +15,7 @@ app.use(
         store: MongoStore.create({
             mongoUrl: 'mongodb+srv://fredy:Devesky123@cluster0.tvkw4.mongodb.net/freelost?retryWrites=true&w=majority',
             ttl: 60 * 60 * 24 * 14, //la session est detruite apres 14 jours de non utilisation
-            // clientPromise: clientPromise.then((m) => m.connection.getClient()),
+            // clientPromise: clientPromise.then((m) => m.connection.getClient())  ,
         }),
     })
 );

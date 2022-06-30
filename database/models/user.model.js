@@ -5,9 +5,10 @@ const bcrypt = require("bcrypt");
 const userSchema = schema({
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    numero: { type: Number, require: true },
-    photo: { type: String }
+    password: { type: String},
+    numero: { type: Number},
+    avatar: { type: String },
+    googleId:{type:String}
 
 
 });

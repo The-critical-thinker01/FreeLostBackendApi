@@ -11,10 +11,29 @@ exports.sessionCreate = (req, res, next) => {
             req.login(user, (err) => {
                 if (err) { next(err) } else {
                     res.status(200).json({
-                        "userId": user._id,
+                        "user": user,
                     });
                 }
             })
         }
     })(req, res, next);
+}
+
+
+
+exports.googleAuth = (req, res, next) => {
+    passport.authenticate('google', {
+        scope: ['email', 'profile']
+    })(req, res, next);
+}
+
+exports.googleAuthCb = (req, res, next) => {
+    passport.authenticate('google',{
+        successRedirect:"/auth/sucessRed",
+        failureRedirect:"/auth/failureRed"
+    })(req, res, next);
+}
+
+exports.signout = (req, res, next) => {
+    req.logout();
 }

@@ -9,10 +9,9 @@ router.use('/users', userRoutes);
 router.use('/auth', authRoutes);
 router.use('/categories',catRoutes);
 
-
-router.get('/', (req, res) => {
-    res.render('home');
-});
+router.get('/',(req,res)=>{
+    res.render('index');
+})
 
 
 
