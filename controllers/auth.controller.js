@@ -36,6 +36,7 @@ exports.googleAuthCb = (req, res, next) => {
 
 
 
+
 exports.facebookAuth = (req, res, next) => {
     passport.authenticate('facebook', {
         scope: ['email', 'profile']

@@ -33,7 +33,7 @@ passport.deserializeUser(async(id, done) => {
 
 
 //connexion avec email/username et mot de passe
-passport.use('local', new LocalStrategy({ usernameField: 'email' }, async(email, password, done) => {
+passport.use('local', new LocalStrategy ({ usernameField: 'email' }, async(email, password, done) => {
         try {
             const user = await findUserPerEmail(email);
             if (user) {
@@ -84,8 +84,6 @@ passport.use('local', new LocalStrategy({ usernameField: 'email' }, async(email,
             done(e);
         }
     }))
-
-
 
 
     passport.use('facebook', new FacebookStrategy({
