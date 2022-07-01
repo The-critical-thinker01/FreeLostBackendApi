@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const { sessionCreate ,signout,googleAuth,googleAuthCb,facebookAuth,facebookAuthCb,instagramAuth,instagramAuthCb} = require('../controllers/auth.controller');
+const { sessionCreate ,signout,googleAuth,
+    googleAuthCb,facebookAuth,facebookAuthCb,
+    instagramAuth,instagramAuthCb} = require('../controllers/auth.controller');
 
 
 router.post('/signin', sessionCreate);
