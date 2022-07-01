@@ -13,11 +13,16 @@ const userSchema = schema({
 
 });
 
-userSchema.statics.hashPassword = (password) => {
+userSchema.statics.hashPassword = function(password) {
     return bcrypt.hash(password, 12);
 }
-userSchema.methods.comparePassword = function(password) {
-    return bcrypt.compare(password, this.password)
+userSchema.methods.comparePassword = async function(password) {
+    let rps;
+ await bcrypt.compare(password, this.password).then(function(result){
+        console.log(result)
+        rps=result;
+    })
+    return rps;
 }
 
 
