@@ -12,7 +12,7 @@ router.get('/users', userList);
 router.get('/Objects', (req, res) => {
     res.send('Demande Get avec succes')
 });
-router.post('/Objects', addNewObject);
+router.post('/Objects/create', addNewObject);
 
 router.put('/Objects/:Objectid', (req, res) => {
     res.send('Demande put avec succes')
