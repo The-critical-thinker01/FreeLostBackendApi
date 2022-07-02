@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const express = require('express');
 const { userList } = require('../controllers/user.controller');
-const { addNewObject } = require('../controllers/object.controller');
+const { addNewObject, getObject } = require('../controllers/object.controller');
 
 
 router.get('/', (req, res) => {
@@ -9,10 +9,10 @@ router.get('/', (req, res) => {
 })
 router.get('/users', userList);
 
-router.get('/Objects', (req, res) => {
-    res.send('Demande Get avec succes')
-});
-router.post('/Objects/create', addNewObject);
+router.get('/Objects', (req, res, next) => {
+    next();
+}, getObject);
+router.post('/Objects', addNewObject);
 
 router.put('/Objects/:Objectid', (req, res) => {
     res.send('Demande put avec succes')

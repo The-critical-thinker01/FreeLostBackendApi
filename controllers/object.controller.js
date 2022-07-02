@@ -14,3 +14,12 @@ exports.addNewObject = (req, res) => {
         res.json(Object);
     });
 };
+
+exports.getObject = (req, res) => {
+    Object.find({}, (err, Object) =>{
+        if(err) {
+            res.send(err);
+        }
+        res.json(Object);
+    });
+};
