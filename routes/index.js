@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const express = require('express');
 const { userList } = require('../controllers/user.controller');
-const { addNewObject, getObject } = require('../controllers/object.controller');
+const { addNewObject, getObjects, getObjectWithID, UpdateObject } = require('../controllers/object.controller');
 
 
 router.get('/', (req, res) => {
@@ -11,12 +11,13 @@ router.get('/users', userList);
 
 router.get('/Objects', (req, res, next) => {
     next();
-}, getObject);
+}, getObjects);
 router.post('/Objects', addNewObject);
 
-router.put('/Objects/:Objectid', (req, res) => {
-    res.send('Demande put avec succes')
-});
+// contact avec ID
+router.get('/Objects/:ObjectId', getObjectWithID);
+// mise a jour
+router.put('/Objects/:ObjectId', UpdateObject);
 router.delete('/Objects/:Objectid', (req, res) => {
     res.send('Demande delete avec succes')
 });

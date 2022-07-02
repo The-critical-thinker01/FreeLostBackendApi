@@ -15,8 +15,26 @@ exports.addNewObject = (req, res) => {
     });
 };
 
-exports.getObject = (req, res) => {
+exports.getObjects = (req, res) => {
     Object.find({}, (err, Object) =>{
+        if(err) {
+            res.send(err);
+        }
+        res.json(Object);
+    });
+};
+
+exports.getObjectWithID = (req, res) => {
+    Object.findById(req.params.ObjectId, (err, Object) =>{
+        if(err) {
+            res.send(err);
+        }
+        res.json(Object);
+    });
+};
+
+exports.UpdateObject = (req, res) => {
+    Object.findOneAndUpdate({ _id: req.params.ObjectId}, req.body, { new: true }, (err, Object) =>{
         if(err) {
             res.send(err);
         }
