@@ -7,7 +7,7 @@ const catRoutes = require('./cat.routes');
 
 router.use('/users', userRoutes);
 router.use('/auth', authRoutes);
-router.use('/categories',catRoutes);
+router.use('/category',catRoutes);
 
 router.get('/',(req,res)=>{
     res.render('index');
