@@ -37,13 +37,19 @@ passport.use('local', new LocalStrategy ({ usernameField: 'email' }, async(email
         try {
             const user = await findUserPerEmail(email);
             if (user) {
-                const match = await user.comparePassword(password);
-                console.log(match);
-                if (match) {
-                    done(null, user);
-                } else {
-                    done(null, false, { message: 'Le mot de passe ne correspond pas!!!' })
+                let match=false;
+                if(user.password == null){
+                    done(null, false, { message: 'Ce compte exite en tant utilisateur google,facebook ou instagram, utilisez ces reseau pour vous connecter !!!' })
+                }else{
+                    const match = await user.comparePassword(password);
+                    if (match) {
+                        done(null, user);
+                    } else {
+                        done(null, false, { message: 'Le mot de passe ne correspond pas!!!' })
+                    }
+
                 }
+              
             } else {
                 done(null, false, { message: 'Utilisateur introuvable!!!' });
             }
