@@ -15,7 +15,6 @@ router.use('/category',catRoutes);
 router.get('/',(req,res)=>{
     res.render('index');
 })
-router.get('/users', userList);
 
 
 router.get('/Objects', (req, res, next) => {

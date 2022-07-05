@@ -4,7 +4,7 @@ const { ObjectSchema } = require('../database/models/object.model');
 
 const Object = mongoose.model('Object',ObjectSchema);
 
-exports.addNewObject = (req, res) => {
+exports.addNewObject = async(req, res) => {
     let NewObject = new Object(req.body);
 
     NewObject.save((err, Object) =>{
@@ -15,7 +15,7 @@ exports.addNewObject = (req, res) => {
     });
 };
 
-exports.getObjects = (req, res) => {
+exports.getObjects = async(req, res) => {
     Object.find({}, (err, Object) =>{
         if(err) {
             res.send(err);
@@ -24,7 +24,7 @@ exports.getObjects = (req, res) => {
     });
 };
 
-exports.getObjectWithID = (req, res) => {
+exports.getObjectWithID = async(req, res) => {
     Object.findById(req.params.ObjectId, (err, Object) =>{
         if(err) {
             res.send(err);
@@ -33,7 +33,7 @@ exports.getObjectWithID = (req, res) => {
     });
 };
 
-exports.UpdateObject = (req, res) => {
+exports.UpdateObject = async(req, res) => {
     Object.findOneAndUpdate({ _id: req.params.ObjectId}, req.body, { new: true }, (err, Object) =>{
         if(err) {
             res.send(err);
