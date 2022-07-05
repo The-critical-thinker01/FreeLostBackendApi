@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="icon" href="/images/logo.png" />
+    <title>FreeLost API</title>
+</head>
+<body>
+    <%- include('./partials/topbar') %>
+    <div class="container">
+        <%- include('./partials/leftAside') %>
+
+        <div>
+            <ul>
+                <li>/auth/google</li> pour se connecter avec google (get)
+                <li>/auth/signin</li> pour se connecter grace a l' email et le password (post)
+                <li>/auth/signout</li>pour deconnecter un utilisateur (get)
+                <li>/users/new</li>pour creer un utilisateur . attend 4 champs (post)
+            </ul>
+        </div>
+
+    </div>
+    <%- include('./partials/footer') %>
+
+<form action="/auth/signin"></form>
+
+</body>
+</html>
+<!DOCTYPE html>
