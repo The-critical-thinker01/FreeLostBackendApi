@@ -41,3 +41,12 @@ exports.UpdateObject = async(req, res) => {
         res.json(Object);
     });
 };
+
+exports.deleteObject = async(req, res) => {
+    Object.deleteOne({ _id: req.params.ObjectId}, (err, Object) =>{
+        if(err) {
+            res.send(err);
+        }
+        res.json({ message: 'Objet effacer avec succes'});
+    });
+};
