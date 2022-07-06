@@ -20,14 +20,14 @@ router.get('/',(req,res)=>{
 router.get('/Objects', (req, res, next) => {
     next();
 }, getObjects);
-router.post('/Objects', addNewObject);
+router.post('/Object', addNewObject);
 
 // Objet avec ID
-router.get('/Objects/:ObjectId', getObjectWithID);
+router.get('/Object/:ObjectId', getObjectWithID);
 // mise a jour
-router.put('/Objects/:ObjectId', UpdateObject);
+router.put('/Object/:ObjectId', UpdateObject);
 // suppression
-router.delete('/Objects/:ObjectId', deleteObject);
+router.delete('/Object/:ObjectId', deleteObject);
 
 
 
