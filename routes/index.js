@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const express = require('express');
 const { userList } = require('../controllers/user.controller');
-const { addNewObject, getObjects, getObjectWithID, UpdateObject } = require('../controllers/object.controller');
+const { addNewObject, getObjects, getObjectWithID, UpdateObject, deleteObject } = require('../controllers/object.controller');
 const userRoutes = require('./user.routes');
 const authRoutes = require('./auth.routes');
 const catRoutes = require('./cat.routes');
@@ -20,15 +20,14 @@ router.get('/',(req,res)=>{
 router.get('/Objects', (req, res, next) => {
     next();
 }, getObjects);
-router.post('/Objects', addNewObject);
+router.post('/Object', addNewObject);
 
-// contact avec ID
-router.get('/Objects/:ObjectId', getObjectWithID);
+// Objet avec ID
+router.get('/Object/:ObjectId', getObjectWithID);
 // mise a jour
-router.put('/Objects/:ObjectId', UpdateObject);
-router.delete('/Objects/:Objectid', (req, res) => {
-    res.send('Demande delete avec succes')
-});
+router.put('/Object/:ObjectId', UpdateObject);
+// suppression
+router.delete('/Object/:ObjectId', deleteObject);
 
 
 
