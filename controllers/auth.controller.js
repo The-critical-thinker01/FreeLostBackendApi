@@ -11,7 +11,7 @@ exports.sessionCreate = (req, res, next) => {
         if (err) {
           next(err);
         } else {
-          res.status(200).json({ user });
+          res.status(200).json(user);
         }
       });
     }
