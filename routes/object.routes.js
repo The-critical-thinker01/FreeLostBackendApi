@@ -4,8 +4,8 @@ const {
   getObjectWithID,
   UpdateObject,
   deleteObject,
+  userList,
 } = require("../controllers/object.controller");
-const { userList } = require("../controllers/user.controller");
 
 const routes = (app) => {
   app
