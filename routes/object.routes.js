@@ -9,20 +9,18 @@ const {
 
 const router = require("express").Router();
 
-router.get(
-  "/Objects",
-  (req, res, next) => {
+router.get("/all",(req, res, next) => {
     next();
   },
   getObjects
 );
-router.post("/Object", addNewObject);
+router.post("/create", addNewObject);
 
 // Objet avec ID
-router.get("/Object/:ObjectId", getObjectWithID);
+router.get("/find/:ObjectId", getObjectWithID);
 // mise a jour
-router.put("/Object/:ObjectId", UpdateObject);
+router.put("/update/:ObjectId", UpdateObject);
 // suppression
-router.delete("/Object/:ObjectId", deleteObject);
+router.delete("/clear/:ObjectId", deleteObject);
 
 module.exports = router;
