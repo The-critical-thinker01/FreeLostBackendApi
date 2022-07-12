@@ -3,9 +3,12 @@ const Schema = mongoose.Schema;
 
  const ObjectSchema = new Schema({
     nomObjet: { type: String, required: true, unique: true },
-    photo: { type: String, required: true, unique: true },
-    Categorie: { type: Number, required: true },
-    CentreDeCollecte: { type: Number, require: true },
+    LieuDePerte: { type: String },
+    Date: { type: Date },
+    Description: { type: String },
+    photo: { type: String },
+    Categorie: { type: String, required: true },
+    CentreDeCollecte: { type: String},
 });
 
 const Object = mongoose.model("Object", ObjectSchema);
