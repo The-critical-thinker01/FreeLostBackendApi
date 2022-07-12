@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { createObject } = require('../queries/object.queries');
 
 const { ObjectSchema } = require('../database/models/object.model');
 
