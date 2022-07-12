@@ -1,4 +1,4 @@
-const { createUser } = require("../queries/user.queries");
+const { createUser, editUserById } = require("../queries/user.queries");
 const path = require("path");
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -25,9 +25,9 @@ exports.uploadImage = [
   upload.single("avatar"),
   async (req, res, next) => {
     try {
-      console.log(req.file);
-      console.log(req.body);
-      res.json({ message: "ok" });
+      // console.log(req.file);
+      // console.log(req.body);
+      res.json({ path: "/images/avatars/" + req.file.filename });
     } catch (e) {
       res.json({ error: [e.message] });
       next(e);
@@ -35,4 +35,14 @@ exports.uploadImage = [
   },
 ];
 
-exports.userUpdate = async (req, res, next) => {};
+exports.userUpdate = async (req, res, next) => {
+  const body = req.body;
+  const id = req.params.userId;
+  try {
+    const userUpdate = await editUserById(body, id);
+    res.json(userUpdate);
+  } catch (e) {
+    res.json({ error: [e.message] });
+    next(e);
+  }
+};
