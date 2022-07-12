@@ -9,6 +9,8 @@ const userSchema = schema({
   numero: { type: Number },
   avatar: { type: String, default: "/images/profil.jpeg" },
   googleId: { type: String },
+  type: { type: String, default: "simple" },
+  dateCreation: { type: Date },
 });
 
 userSchema.statics.hashPassword = function (password) {
