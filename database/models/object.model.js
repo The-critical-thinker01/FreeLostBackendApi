@@ -8,16 +8,13 @@ const Schema = mongoose.Schema;
     Description: { type: String },
     photo: { type: String },
     Categorie: { type: String},
-    nomDoc: { type: Date },
+    nomDoc: { type: String },
     Marque: { type: String },
     Modele: { type: String },
-    nom: { type: Date },
+    nom: { type: String },
     prenom: { type: String },
     nationalite: { type: String },
     dateNaiss: { type: Date},
-
-
-
 });
 
 const Object = mongoose.model("Object", ObjectSchema);

@@ -4,7 +4,7 @@ exports.listObjects = () => {
     return Object.find().exec();
 }
 
-exports.createObject = async(Object) => {
+exports.createObject = async(object) => {
     try{
         const newObject = new Object({
             nomObjet: Object.nomObjet,
