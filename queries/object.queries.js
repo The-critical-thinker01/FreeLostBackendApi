@@ -8,13 +8,21 @@ exports.createObject = async(Object) => {
     try{
         const newObject = new Object({
             nomObjet: Object.nomObjet,
+            lieu: Object.lieu,
+            Date: Object.Date,
             photo: Object.photo,
+            Description: Object.Description,
             Categorie: Object.Categorie,
-            CentreDeCollecte: Object.CentreDeCollecte
+            nomDoc: Object.nomDoc,
+            Marque: Object.Marque,
+            Modele: Object.Modele,
+            nom: Object.nom, prenom: Object.prenom,
+            nationalite: Object.nationalite,
+            dateNaiss: Object.dateNaiss
+
         });
         return newObject.save();
   } catch(e){
       throw e;
-
 }
 }

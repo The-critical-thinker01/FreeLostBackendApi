@@ -5,15 +5,15 @@ const { ObjectSchema } = require('../database/models/object.model');
 
 const Object = mongoose.model('Object',ObjectSchema);
 
-exports.addNewObject = async(req, res) => {
-    let NewObject = new Object(req.body);
-
-    NewObject.save((err, Object) =>{
-        if(err) {
-            res.send(err);
+exports.addNewObject = async(req, res, next) => {
+    const body = req.body;
+        try {
+            const newObject = await createObject(body);
+            res.json(newObject);
+        } catch (e) {
+            res.json({ error: [e.message] });
+            next(e);
         }
-        res.json(Object);
-    });
 };
 
 exports.getObjects = async(req, res) => {
