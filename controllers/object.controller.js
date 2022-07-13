@@ -1,53 +1,71 @@
-const mongoose = require('mongoose');
-const { createObject } = require('../queries/object.queries');
+const { createObject, allObject } = require("../queries/object.queries");
+const path = require("path");
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../public/images/objects"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+const upload = multer({ storage: storage });
 
-const { ObjectSchema } = require('../database/models/object.model');
-
-const Object = mongoose.model('Object',ObjectSchema);
-
-exports.addNewObject = async(req, res) => {
-    let NewObject = new Object(req.body);
-
-    NewObject.save((err, Object) =>{
-        if(err) {
-            res.send(err);
-        }
-        res.json(Object);
+exports.getAllObjects = async (req, res, next) => {
+  try {
+    const objects = await allObject();
+    res.status(200).json({
+      objects,
     });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    next(err);
+  }
+};
+exports.addNewObject = async (req, res, next) => {
+  const body = req.body;
+  try {
+    const newObject = await createObject(body);
+    res.json(newObject);
+  } catch (e) {
+    res.json({ error: [e.message] });
+    next(e);
+  }
 };
 
-exports.getObjects = async(req, res) => {
-    Object.find({}, (err, Object) =>{
-        if(err) {
-            res.send(err);
-        }
-        res.json(Object);
-    });
+exports.uploadImage = [
+  upload.single("object"),
+  async (req, res, next) => {
+    try {
+      // console.log(req.file);
+      // console.log(req.body);
+      res.json({ path: "/images/objects/" + req.file.filename });
+    } catch (e) {
+      res.json({ error: [e.message] });
+      next(e);
+    }
+  },
+];
+
+exports.UpdateObject = async (req, res) => {
+  Object.findOneAndUpdate(
+    { _id: req.params.ObjectId },
+    req.body,
+    { new: true },
+    (err, Object) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(Object);
+    }
+  );
 };
 
-exports.getObjectWithID = async(req, res) => {
-    Object.findById(req.params.ObjectId, (err, Object) =>{
-        if(err) {
-            res.send(err);
-        }
-        res.json(Object);
-    });
-};
-
-exports.UpdateObject = async(req, res) => {
-    Object.findOneAndUpdate({ _id: req.params.ObjectId}, req.body, { new: true }, (err, Object) =>{
-        if(err) {
-            res.send(err);
-        }
-        res.json(Object);
-    });
-};
-
-exports.deleteObject = async(req, res) => {
-    Object.deleteOne({ _id: req.params.ObjectId}, (err, Object) =>{
-        if(err) {
-            res.send(err);
-        }
-        res.json({ message: 'Objet effacer avec succes'});
-    });
+exports.deleteObject = async (req, res) => {
+  Object.deleteOne({ _id: req.params.ObjectId }, (err, Object) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json({ message: "Objet effacer avec succes" });
+  });
 };
