@@ -37,3 +37,22 @@ exports.editUserById = async (user, id) => {
 exports.allUsers = async () => {
   return User.find().exec();
 };
+exports.deleteUser = async (id) => {
+  try {
+    const userDelete = await User.findByIdAndDelete(id);
+    return userDelete;
+  } catch (e) {
+    throw e;
+  }
+};
+
+exports.editUserType = async (type, id) => {
+  try {
+    const userUpdate = await User.findByIdAndUpdate(id, type, {
+      new: true,
+    });
+    return userUpdate;
+  } catch (e) {
+    throw e;
+  }
+};

@@ -1,4 +1,8 @@
-const { createObject, allObject } = require("../queries/object.queries");
+const {
+  createObject,
+  allObject,
+  deleteObjectById,
+} = require("../queries/object.queries");
 const path = require("path");
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -61,11 +65,24 @@ exports.UpdateObject = async (req, res) => {
   );
 };
 
-exports.deleteObject = async (req, res) => {
-  Object.deleteOne({ _id: req.params.ObjectId }, (err, Object) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json({ message: "Objet effacer avec succes" });
-  });
+exports.deleteObject = async (req, res, next) => {
+  try {
+    const object = await deleteObjectById(req.params.ObjectId);
+    res.json(object);
+  } catch (e) {
+    res.json({ error: [e.message] });
+    next(e);
+  }
+};
+exports.validerPublication = async (req, res, next) => {
+  const idObject = req.params.ObjectId;
+  const body = req.body;
+  try {
+    const objectUpdate = await objectUpdate(idObject, body);
+    res.status(200).json({
+      objectUpdate,
+    });
+  } catch (e) {
+    next(e);
+  }
 };

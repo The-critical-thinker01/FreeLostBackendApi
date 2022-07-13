@@ -11,3 +11,21 @@ exports.createObject = async (object) => {
     throw e;
   }
 };
+exports.deleteObjectById = async (id) => {
+  try {
+    const objectDelete = await Object.findByIdAndDelete(id);
+    return objectDelete;
+  } catch (e) {
+    throw e;
+  }
+};
+exports.objectUpdate = async (id, body) => {
+  try {
+    const objectUpdate = await Object.findByIdAndUpdate(id, body, {
+      new: true,
+    });
+    return objectUpdate;
+  } catch (e) {
+    throw e;
+  }
+};

@@ -4,6 +4,9 @@ const {
   addNewObject,
   getAllObjects,
   uploadImage,
+  deleteObject,
+  deleteAllObject,
+  validerPublication,
 } = require("../controllers/object.controller");
 
 router.get("/all", getAllObjects);
@@ -13,6 +16,6 @@ router.post("/uploadImageObjet", uploadImage);
 // // mise a jour
 // router.put("/update/:ObjectId", UpdateObject);
 // // suppression
-// router.delete("/clear/:ObjectId", deleteObject);
-
+router.delete("/clear/:ObjectId", deleteObject);
+router.patch("/edit/:idObject", validerPublication);
 module.exports = router;
