@@ -33,3 +33,7 @@ exports.editUserById = async (user, id) => {
     throw e;
   }
 };
+
+exports.allUsers = async () => {
+  return User.find().exec();
+};

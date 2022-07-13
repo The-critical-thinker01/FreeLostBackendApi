@@ -19,7 +19,8 @@ const ObjectSchema = new Schema({
   dateCreation: { type: String },
   idUtilisateur: { type: String },
   idModerateur: { type: String },
-  statut: { type: String, default: "nn" },
+  statut: { type: String },
+  valider: { type: String, default: "non" },
 });
 
 const Object = mongoose.model("Object", ObjectSchema);
