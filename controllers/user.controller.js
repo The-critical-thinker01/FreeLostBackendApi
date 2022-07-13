@@ -1,4 +1,8 @@
-const { createUser, editUserById } = require("../queries/user.queries");
+const {
+  createUser,
+  editUserById,
+  allUsers,
+} = require("../queries/user.queries");
 const path = require("path");
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -44,5 +48,17 @@ exports.userUpdate = async (req, res, next) => {
   } catch (e) {
     res.json({ error: [e.message] });
     next(e);
+  }
+};
+
+exports.getAllUsers = async (req, res, next) => {
+  try {
+    const users = await allUsers();
+    res.status(200).json({
+      users,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+    next(err);
   }
 };
