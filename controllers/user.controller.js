@@ -2,6 +2,8 @@ const {
   createUser,
   editUserById,
   allUsers,
+  deleteUser,
+  editUserType,
 } = require("../queries/user.queries");
 const path = require("path");
 const multer = require("multer");
@@ -60,5 +62,27 @@ exports.getAllUsers = async (req, res, next) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
     next(err);
+  }
+};
+
+exports.userDelete = async (req, res, next) => {
+  const id = req.params.userId;
+  try {
+    const userDelete = await deleteUser(id);
+    res.json(userDelete);
+  } catch (e) {
+    res.json({ error: [e.message] });
+    next(e);
+  }
+};
+
+exports.userChangetype = async (req, res, next) => {
+  const id = req.params.userId;
+  try {
+    const userChangetype = await editUserType(req.body, id);
+    res.json(userChangetype);
+  } catch (e) {
+    res.json({ error: [e.message] });
+    next(e);
   }
 };
