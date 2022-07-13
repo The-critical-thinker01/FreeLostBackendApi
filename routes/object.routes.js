@@ -1,26 +1,18 @@
-const {
-  addNewObject,
-  getObjects,
-  getObjectWithID,
-  UpdateObject,
-  deleteObject,
-  userList,
-} = require("../controllers/object.controller");
-
 const router = require("express").Router();
 
-router.get("/all",(req, res, next) => {
-    next();
-  },
-  getObjects
-);
-router.post("/create", addNewObject);
+const {
+  addNewObject,
+  getAllObjects,
+  uploadImage,
+} = require("../controllers/object.controller");
 
-// Objet avec ID
-router.get("/find/:ObjectId", getObjectWithID);
-// mise a jour
-router.put("/update/:ObjectId", UpdateObject);
-// suppression
-router.delete("/clear/:ObjectId", deleteObject);
+router.get("/all", getAllObjects);
+router.post("/create", addNewObject);
+router.post("/uploadImageObjet", uploadImage);
+// router.get("/find/:ObjectId", findUserByid);
+// // mise a jour
+// router.put("/update/:ObjectId", UpdateObject);
+// // suppression
+// router.delete("/clear/:ObjectId", deleteObject);
 
 module.exports = router;
