@@ -6,7 +6,7 @@ const ObjectSchema = new Schema({
   Lieu: { type: String },
   Date: { type: String },
   Description: { type: String },
-  Photo: { type: String },
+  Photo: { type: String, default: "/images/photo-non-disponible-1.png" },
   Categorie: { type: String },
   NomDoc: { type: String },
   Marque: { type: String },
