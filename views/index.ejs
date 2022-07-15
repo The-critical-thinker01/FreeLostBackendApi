@@ -176,7 +176,7 @@ users/new
             <pre><code class="json">
 Par exemple:
 
-  requête:{
+  requête POST:{
         username-> "Leo",
         email-> "techsleo@gmail.com"
         password-> "1234",
@@ -193,6 +193,25 @@ Par exemple:
         "__v": 0,  
         "type": "simple"
     },
+}
+
+/users/changeType/:userId
+ PATCH >https://freelost-api.kouelab.com/users/changeType/:userId
+
+requête PATCH:{
+    type-> "moderateur",
+}
+
+resultat: 
+{   "_id": ObjectId('62ccad588f1b65f689851280),
+    "username": "Brown Nanfa ",
+    "email": "nanfabrown12@gmail.com",  
+    "password": "$2b$12$nCyH8FLu9TXlJJE9/8K8cum96kYZR.iM0Dq8sQxMOmHL8zB.GxgyO",
+    "numero": 237670881225,  
+    "avatar": "/images/avatars/1657709800319-rn_image_picker_lib_temp_dbe52d69-843f-4c4f-94ec-e4ea96c29382.jpg",  
+    "__v": 0,  
+    "type": "moderateur"
+},
 }
                 </code></pre>
             <h4>Les paramètres de la requête </h4>
@@ -235,6 +254,15 @@ Par exemple:
                 </tr>
                 </tbody>
             </table>
+            <p> 
+                Pour mettre a jour son avatar dans son profil devez envoyer une requête POST avec l'url suivante:<br>
+                <code class="higlighted break-word">https://freelost-api.kouelab.com/users/update/avatar</code><br> 
+            </p>
+            <p> 
+                Pour qu'un admin puisse changer le type d'un utilisateur devez envoyer une requête PATCH avec l'url suivante:<br>
+                <code class="higlighted break-word">https://freelost-api.kouelab.com/users/changeType/:userId</code><br> 
+            </p>
+            <br>
         </div>
 
         <div class="overflow-hidden content-section" id="content-errors">
