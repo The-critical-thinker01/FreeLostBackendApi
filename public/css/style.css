@@ -205,8 +205,8 @@ pre{
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: #323f4c;
-    border-color: #323f4c;
+    background-color: #050505;
+    border-color: #050505;
 }
 .content {
     position: relative;
@@ -279,8 +279,8 @@ pre{
 }
 .content pre,
 .content blockquote {
-    background-color: #323f4c;
-    border-color: #323f4c;
+    background-color: #050505;
+    border-color: #050505;
     color: #fff;
     padding: 0 28px 2em;
     margin: 0;
@@ -346,7 +346,7 @@ pre{
 }
 .burger-menu-icon .line {
     fill: none;
-    stroke: #000;
+    stroke: #050505;
     stroke-width: 6;
     transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
         stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
