@@ -51,13 +51,13 @@
             <div class="info"><b>Dernière mise à jour :</b> 15 Juil, 2022</div>
         </div>
         <ul>
-            <li class="scroll-to-link active" data-target="content-get-started">
+            <li class="scroll-to-link active" data-target="commencer">
                 <a>Commencer</a>
             </li>
-            <li class="scroll-to-link" data-target="content-get-characters">
+            <li class="scroll-to-link" data-target="authentification">
                 <a>Authentification</a>
             </li>
-            <li class="scroll-to-link" data-target="content-get-characters">
+            <li class="scroll-to-link" data-target="users">
                 <a>Les Utilisateurs</a>
             </li>
             <li class="scroll-to-link" data-target="content-get-characters">
@@ -72,7 +72,7 @@
 <div class="content-page">
     <div class="content-code"></div>
     <div class="content">
-        <div class="overflow-hidden content-section" id="content-get-started">
+        <div class="overflow-hidden content-section" id="commencer">
             <h1>Commencer</h1>
             <pre>
     Point d'entrée de l' API
@@ -83,88 +83,53 @@
                 L'API Freelost permet de faire la gestion des objets perdus, ainsi de pouvoir gérer tout ce qui est associé comme , les utilisateurs, les objets et leur catégorie, les centres de collecte.
             </p>
             <p>
-                Pour utiliser cette API, vous avez besoins de  la <strong>Clé de l'API</strong>. Contactez-nous à  <a href="mailto:contact@freelost-api.kouelab.com">contact@freelost-api.kouelab.com</a> pour avoir ta clé d'API.
+                Pour utiliser cette API, vous avez besoins de  la <strong>Clé de l'API</strong>. Contactez-nous à  <a href="mailto:contact@freelost-api.kouelab.com">contact@freelost-api.kouelab.com</a> pour avoir votre clé d'API.
             </p>
         </div>
-        <div class="overflow-hidden content-section" id="content-get-characters">
+        <div class="overflow-hidden content-section" id="authentification">
             <h2>Authentification</h2>
             <pre><code class="bash">
-# ici c'est un exemple utilisant curl
-curl \
--X POST https://freelost-api.kouelab.com/auth \
--F 'secret_key=ta_clé_api' \
--F 'email=techsleo@gmail.com' \
--F 'mot de passe=1234' \
+# ici c'est un exemple utilisant auth
 
+auth/sigin
+ POST https://freelost-api.kouelab.com/auth/sigin 
                 </code></pre>
             <p>
                 Pour vous authentifier vous devez envoyer une requête POST avec l'url suivante :<br>
                 <code class="higlighted break-word">https://freelost-api.kouelab.com/auth/google</code> pour se connecter avec google.<br>
                 Pour se connecter grâce à l'email et le mot de passe: <code class="higlighted break-word">https://freelost-api.kouelab.com/auth/signin</code> 
             </p>
+            <pre><code class="bash">
+auth/signout
+GET https://freelost-api.kouelab.com/auth/signout 
+        </code></pre>
+    <p>
+        Pour vous deconnecter vous devez envoyer une requête GET avec l'url suivante :<br>
+        <code class="higlighted break-word">https://freelost-api.kouelab.com/auth/signout</code><br>
+    </p>
+
             <br>
             <pre><code class="json">
-Result de l'exemple:
+Par exemple:
 
-{
-  requête:{
-      "techsleo@gmail.com",
-      "1234"
-    ],
+  requête POST:{
+    username-> "techsleo@gmail.com",
+    mot de passe-> "1234"
   }
-  resultat: [
-    {
-      id: 1,
-      first_name: "Leo",
-      last_name: "Nguimdo",
-      alive: true,
-      sexe: "M",
-      numero: 670881225,
-      ville: "Dschang"
+
+  resultat: 
+    {   "_id": ObjectId('62ccad588f1b65f689851280),
+        "username": "Leo Nguimdo ",
+        "email": "techsleo@gmail.com",  
+        "password": "$2b$12$nCyH8FLu9TXlJJE9/8K8cum96kYZR.iM0Dq8sQxMOmHL8zB.GxgyO",
+        "numero": 237670881225,  
+        "avatar": "/images/avatars/1657709800319-rn_image_picker_lib_temp_dbe52d69-843f-4c4f-94ec-e4ea96c29382.jpg",  
+        "__v": 0,  
+        "type": "moderateur"
     },
-    {
-      id: 2,
-      first_name: "Eddard",
-      last_name: "Stark",
-      alive: false,
-      sexe: "m",
-      age: 35,
-      location: 'Winterfell'
-    },
-    {
-      id: 3,
-      first_name: "Catelyn",
-      last_name: "Stark",
-      alive: false,
-      house: "Stark",
-      gender: "f",
-      age: 33,
-      location: "Winterfell"
-    },
-    {
-      id: 4,
-      first_name: "Roose",
-      last_name: "Bolton",
-      alive: false,
-      house: "Bolton",
-      gender: "m",
-      age: 40,
-      location: "Dreadfort"
-    },
-    {
-      id: 5,
-      first_name: "Ramsay",
-      last_name: "Snow",
-      alive: false,
-      house: "Bolton",
-      gender: "m",
-      age: 15,
-      location: "Dreadfort"
-    },
-  ]
 }
                 </code></pre>
-            <h4>Les paramètres de la requête </h4>
+            <h4>Les paramètres de la requête POST</h4>
             <table class="central-overflow-x">
                 <thead>
                 <tr>
@@ -182,7 +147,7 @@ Result de l'exemple:
                 <tr>
                     <td>email</td>
                     <td>String</td>
-                    <td>l'adresse emailo de celui qui veut se connecter.</td>
+                    <td>l'adresse email de celui qui veut se connecter.</td>
                 </tr>
                 <tr>
                     <td>mot de passe</td>
@@ -191,35 +156,87 @@ Result de l'exemple:
                         Le mot de passe de celui veut se connecter 
                     </td>
                 </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="overflow-hidden content-section" id="users">
+            <h2>Les Utilisateurs</h2>
+            <pre><code class="bash">
+# ici c'est un exemple utilisant users
+
+users/new
+ POST https://freelost-api.kouelab.com/users/new
+                </code></pre>
+            <p>
+                Pour creer un nouveau compte vous devez envoyer une requête POST avec l'url suivante :<br>
+                <code class="higlighted break-word">https://freelost-api.kouelab.com/users/new</code><br> 
+            </p>
+            <br>
+            <pre><code class="json">
+Par exemple:
+
+  requête:{
+        username-> "Leo",
+        email-> "techsleo@gmail.com"
+        password-> "1234",
+        numero-> "678654309"
+  }
+
+  resultat: 
+    {   "_id": ObjectId('62ccad588f1b65f689851280),
+        "username": "Leo Nguimdo ",
+        "email": "techsleo@gmail.com",  
+        "password": "$2b$12$nCyH8FLu9TXlJJE9/8K8cum96kYZR.iM0Dq8sQxMOmHL8zB.GxgyO",
+        "numero": 237670881225,  
+        "avatar": "/images/avatars/1657709800319-rn_image_picker_lib_temp_dbe52d69-843f-4c4f-94ec-e4ea96c29382.jpg",  
+        "__v": 0,  
+        "type": "simple"
+    },
+}
+                </code></pre>
+            <h4>Les paramètres de la requête </h4>
+
+            <table class="central-overflow-x">
+                <thead>
                 <tr>
-                    <td>compte google</td>
-                    <td>Boolean</td>
-                    <td>
-                        Le compte google de l'utilisateur en question
-                    </td>
+                    <th>Champ</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>clé_api</td>
+                    <td>String</td>
+                    <td>Ta clé de l'API.</td>
                 </tr>
                 <tr>
-                    <td>gender</td>
+                    <td>username</td>
+                    <td>String</td>
+                    <td>le nom d'utilisateur de celui qui veut creer son compte.</td>
+                </tr>
+                <tr>
+                    <td>email</td>
+                    <td>String</td>
+                    <td>l'email de celui qui veut creer son compte.</td>
+                </tr>
+                <tr>
+                    <td>password</td>
                     <td>String</td>
                     <td>
-                        (optional) a string to filter character by gender:<br>
-                        m: male<br>
-                        f: female
+                        Le mot de passe de celui veut se connecter 
                     </td>
                 </tr>
                 <tr>
-                    <td>offset</td>
-                    <td>Integer</td>
-                    <td>(optional - default: 0) A cursor for use in pagination. Pagination starts offset the specified offset.</td>
-                </tr>
-                <tr>
-                    <td>limit</td>
-                    <td>Integer</td>
-                    <td>(optional - default: 10) A limit on the number of objects to be returned, between 1 and 100.</td>
+                    <td>numero</td>
+                    <td>Number</td>
+                    <td>le numero de celui qui veut creer son compte.</td>
                 </tr>
                 </tbody>
             </table>
         </div>
+
         <div class="overflow-hidden content-section" id="content-errors">
             <h2>Errors</h2>
             <p>
