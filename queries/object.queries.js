@@ -29,3 +29,11 @@ exports.objectUpdate = async (id, body) => {
     throw e;
   }
 };
+exports.getObjectBycategory = async (category) => {
+  try {
+    const object = await Object.find({ Categorie: category });
+    return object;
+  } catch (e) {
+    throw e;
+  }
+};
