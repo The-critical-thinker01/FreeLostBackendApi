@@ -17,5 +17,5 @@ router.post("/uploadImageObjet", uploadImage);
 // router.put("/update/:ObjectId", UpdateObject);
 // // suppression
 router.delete("/clear/:ObjectId", deleteObject);
-router.patch("/edit/:idObject", updateObject);
+router.patch("/edit/:ObjectId", updateObject);
 module.exports = router;
