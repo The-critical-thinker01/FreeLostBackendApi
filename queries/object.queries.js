@@ -21,10 +21,10 @@ exports.deleteObjectById = async (id) => {
 };
 exports.objectUpdate = async (id, body) => {
   try {
-    const objectUpdate = await Object.findByIdAndUpdate(id, body, {
+    const object = await Object.findByIdAndUpdate(id, body, {
       new: true,
     });
-    return objectUpdate;
+    return object;
   } catch (e) {
     throw e;
   }
