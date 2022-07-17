@@ -2,9 +2,11 @@ const {
   createObject,
   allObject,
   deleteObjectById,
+  objectUpdate,
 } = require("../queries/object.queries");
 const path = require("path");
 const multer = require("multer");
+const { app } = require("../app");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, "../public/images/objects"));
@@ -31,6 +33,7 @@ exports.addNewObject = async (req, res, next) => {
   try {
     const newObject = await createObject(body);
     res.json(newObject);
+    app.emit("addObject", newObject);
   } catch (e) {
     res.json({ error: [e.message] });
     next(e);
@@ -51,19 +54,19 @@ exports.uploadImage = [
   },
 ];
 
-exports.UpdateObject = async (req, res) => {
-  Object.findOneAndUpdate(
-    { _id: req.params.ObjectId },
-    req.body,
-    { new: true },
-    (err, Object) => {
-      if (err) {
-        res.send(err);
-      }
-      res.json(Object);
-    }
-  );
-};
+// exports.UpdateObject = async (req, res) => {
+//   Object.findOneAndUpdate(
+//     { _id: req.params.ObjectId },
+//     req.body,
+//     { new: true },
+//     (err, Object) => {
+//       if (err) {
+//         res.send(err);
+//       }
+//       res.json(Object);
+//     }
+//   );
+// };
 
 exports.deleteObject = async (req, res, next) => {
   try {
@@ -74,13 +77,13 @@ exports.deleteObject = async (req, res, next) => {
     next(e);
   }
 };
-exports.validerPublication = async (req, res, next) => {
+exports.updateObject = async (req, res, next) => {
   const idObject = req.params.ObjectId;
   const body = req.body;
   try {
-    const objectUpdate = await objectUpdate(idObject, body);
+    const object = await objectUpdate(idObject, body);
     res.status(200).json({
-      objectUpdate,
+      object,
     });
   } catch (e) {
     next(e);

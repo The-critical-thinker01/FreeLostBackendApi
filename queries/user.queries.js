@@ -56,3 +56,7 @@ exports.editUserType = async (type, id) => {
     throw e;
   }
 };
+
+exports.findUserPerId = async (id) => {
+  return await User.findById(id).exec();
+};
