@@ -19,7 +19,7 @@ const ObjectSchema = new Schema({
   dateCreation: { type: String },
   idUtilisateur: { type: String },
   idModerateur: { type: String },
-  statut: { type: String },
+  statut: { type: String }, //trouver ou perdu
   valider: { type: String, default: "non" },
 });
 

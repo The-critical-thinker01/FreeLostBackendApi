@@ -278,20 +278,3 @@ app.on("addObject", async (object) => {
     console.log(e);
   }
 });
-app.get("/outlook", function (req, res) {
-  nodeoutlook.sendEmail({
-    auth: {
-      user: "freelost237@outlook.be",
-      pass: "@Lostfree237",
-    },
-    from: "freelost237@outlook.be",
-    to: "fredypone22@gmail.com",
-    subject: "test",
-    html: "<b>This is bold text</b>",
-    text: "je teste si notre api peut envyer des message!",
-    replyTo: "",
-
-    onError: (e) => console.log(e),
-    onSuccess: (i) => res.send("Email envoyé"),
-  });
-});

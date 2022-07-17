@@ -4,7 +4,12 @@ const {
   allUsers,
   deleteUser,
   editUserType,
+  findUserPerId,
 } = require("../queries/user.queries");
+const {
+  findMyObjects,
+  findMyObjectsValidate,
+} = require("../queries/object.queries");
 const path = require("path");
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -83,6 +88,39 @@ exports.userChangetype = async (req, res, next) => {
     res.json(userChangetype);
   } catch (e) {
     res.json({ error: [e.message] });
+    next(e);
+  }
+};
+exports.mesObjectPublier = async (req, res, next) => {
+  try {
+    const object = await findMyObjects(req.params.userId);
+    res.status(200).json({
+      object,
+    });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+exports.mesObjectvalider = async (req, res, next) => {
+  try {
+    const object = await findMyObjectsValidate(req.params.userId);
+    res.status(200).json({
+      object,
+    });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+exports.findUserById = async (req, res, next) => {
+  try {
+    const object = await findUserPerId(req.params.userId);
+    res.status(200).json({
+      object,
+    });
+  } catch (e) {
+    console.log(e);
     next(e);
   }
 };
