@@ -290,7 +290,7 @@ pre{
     box-sizing: border-box;
 }
 .content pre code, .content pre {
-    font-size: 12px;
+    font-size: px;
     line-height: 1.5;
 }
 .content blockquote,

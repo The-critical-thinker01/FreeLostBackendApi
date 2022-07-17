@@ -48,7 +48,7 @@
     <div class="content-menu">
         <div class="content-infos">
             <div class="info"><b>Version:</b> 1.0</div>
-            <div class="info"><b>Dernière mise à jour :</b> 15 Juil, 2022</div>
+            <div class="info"><b>Dernière mise à jour :</b> 17 Juil, 2022</div>
         </div>
         <ul>
             <li class="scroll-to-link active" data-target="commencer">
@@ -60,10 +60,10 @@
             <li class="scroll-to-link" data-target="users">
                 <a>Les Utilisateurs</a>
             </li>
-            <li class="scroll-to-link" data-target="content-get-characters">
-                <a>Les objets </a>
+            <li class="scroll-to-link" data-target="objects">
+                <a>Les Objets </a>
             </li>
-            <li class="scroll-to-link" data-target="content-errors">
+            <li class="scroll-to-link" data-target="errors">
                 <a>Les Erreurs</a>
             </li>
         </ul>
@@ -99,15 +99,6 @@ auth/sigin
                 <code class="higlighted break-word">https://freelost-api.kouelab.com/auth/google</code> pour se connecter avec google.<br>
                 Pour se connecter grâce à l'email et le mot de passe: <code class="higlighted break-word">https://freelost-api.kouelab.com/auth/signin</code> 
             </p>
-            <pre><code class="bash">
-auth/signout
-GET https://freelost-api.kouelab.com/auth/signout 
-        </code></pre>
-    <p>
-        Pour vous deconnecter vous devez envoyer une requête GET avec l'url suivante :<br>
-        <code class="higlighted break-word">https://freelost-api.kouelab.com/auth/signout</code><br>
-    </p>
-
             <br>
             <pre><code class="json">
 Par exemple:
@@ -158,8 +149,18 @@ Par exemple:
                 </tr>
                 </tbody>
             </table>
-        </div>
 
+            <p>
+                Pour vous deconnecter vous devez envoyer une requête GET avec l'url suivante :<br>
+                <code class="higlighted break-word">https://freelost-api.kouelab.com/auth/signout</code><br>
+            </p>
+            <p>
+                Lorsqu'un utilisateur effectue une première connexion ou inscription, un cookies de session est crée sur son 
+                appareil <br><br>
+                Ce dernier n'aura plus besoin de s'authentifier prochainement pour utiliser l'application<br><br>
+                les modes de connexion via Facebook et Instagram ne sont pas pleinement operationnels
+            </p>
+        </div>
         <div class="overflow-hidden content-section" id="users">
             <h2>Les Utilisateurs</h2>
             <pre><code class="bash">
@@ -255,62 +256,208 @@ resultat:
                 </tbody>
             </table>
             <p> 
-                Pour mettre a jour son avatar dans son profil devez envoyer une requête POST avec l'url suivante:<br>
+                Pour mettre a jour son avatar dans son profil, vous devez envoyer une requête POST avec l'url suivante:<br>
                 <code class="higlighted break-word">https://freelost-api.kouelab.com/users/update/avatar</code><br> 
             </p>
             <p> 
-                Pour qu'un admin puisse changer le type d'un utilisateur devez envoyer une requête PATCH avec l'url suivante:<br>
+                Pour qu'un moderateur puisse changer le type d'un utilisateur, il doit envoyer une requête PATCH avec l'url suivante:<br>
                 <code class="higlighted break-word">https://freelost-api.kouelab.com/users/changeType/:userId</code><br> 
             </p>
+            <p> 
+                Pour qu'un  utilisateur puisse mèttre à jour ses informations,vous devez envoyer une requête PUT avec l'url suivante:<br>
+                <code class="higlighted break-word">https://freelost-api.kouelab.com/users/update/:userId</code><br> 
+            </p>
+            <p> 
+                Pour suppprimer un utilisateur, vous devez envoyer une requête DELETE avec l'url suivante:<br>
+                <code class="higlighted break-word">https://freelost-api.kouelab.com/users/delete/:userId</code><br> 
+            </p>
+               <p> userId représente l'identifiant de l'utlisateur qui est de type String
             <br>
+            <p> 
+                Pour obtenir la liste de tout les utilisateurs, vous devez envoyer une requête GET avec l'url suivante:<br>
+                <code class="higlighted break-word">https://freelost-api.kouelab.com/users/all</code><br> 
+            </p>
         </div>
 
-        <div class="overflow-hidden content-section" id="content-errors">
-            <h2>Errors</h2>
+        <div class="overflow-hidden content-section" id="objects">
+            <h2>Les Objets</h2>
+            <pre><code class="bash">
+# ici c'est un exemple utilisant object
+
+object/create
+ POST https://freelost-api.kouelab.com/object/create
+                </code></pre>
             <p>
-                The Westeros API uses the following error codes:
+                Pour déclarer un objet vous devez envoyer une requête POST avec l'url suivante :<br>
+                <code class="higlighted break-word">https://freelost-api.kouelab.com/object/create</code><br> 
             </p>
-            <table>
+            <br>
+            <pre><code class="json">
+Par exemple:
+
+  requête POST:{
+        nomObjet-> "",
+        Lieu-> "Dschang"
+        Date-> "Sun Jun 06 2021",
+        Description-> "j'ai perdu ma carte dans un bus de général dans la ville de dschang"
+        Photo-> "1657709800319-rn_image_picker_lib_temp_dbe52d69-843f-4c4f-94ec-e4ea96c29382",
+        Categorie-> "Papiers et documents officiels"
+        NomDoc-> "CNI",
+        Marque-> ""
+        Modele-> "",
+        UserNom-> "mezazem"
+        UserPrenom-> "beno",
+        nationalite-> "camerounaise"
+  }
+
+  resultat: {  
+    "_id": ObjectId('62ccad588f1b65f689851280),  
+    "nomObjet": "",  
+    "Lieu": "Dschang ",  
+    "Description": "j'ai perdu ma carte dans un bus de général dans la ville de dschang",  
+    "Photo": "/images/objects/1657709800319-rn_image_picker_lib_temp_dbe52d69-843f-4c4f-94ec-e4ea96c29382",  
+    "Categorie": "Papiers et documents officiels",  
+    "NomDoc": "CNI ",  
+    "Marque": "",  
+    "Modele": "",  
+    "UserNom": "mezazem",  
+    "UserPrenom": "beno",  
+    "Nationalite": "camerounaise",  
+    "DatePerteObjet": "Sun Jun 06 2021",  
+    "idUtilisateur": "62ccad588f1b65f689851280", 
+    "statut": "Perdu",
+    "valider": "non",  
+    "__v": 0}
+}
+
+/object/edit/:idObject
+ PATCH >https://freelost-api.kouelab.com/users/edit/:idObject
+
+requête PATCH:{
+    idObject-> "62ccad588f1b65f689851280",
+    valider-> "oui",
+}
+
+resultat: {  
+    "_id": ObjectId('62ccad588f1b65f689851280),  
+    "nomObjet": "",  
+    "Lieu": "Dschang ",  
+    "Description": "j'ai perdu ma carte dans un bus de général dans la ville de dschang",  
+    "Photo": "/images/objects/1657709800319-rn_image_picker_lib_temp_dbe52d69-843f-4c4f-94ec-e4ea96c29382",  
+    "Categorie": "Papiers et documents officiels",  
+    "NomDoc": "CNI ",  
+    "Marque": "",  
+    "Modele": "",  
+    "UserNom": "mezazem",  
+    "UserPrenom": "beno",  
+    "Nationalite": "camerounaise",  
+    "DatePerteObjet": "Sun Jun 06 2021",  
+    "idUtilisateur": "62ccad588f1b65f689851280", 
+    "statut": "Perdu",
+    "valider": "oui",  
+    "__v": 0}
+}
+
+                </code></pre>
+            <h4>Les paramètres de la requête </h4>
+
+            <table class="central-overflow-x">
                 <thead>
                 <tr>
-                    <th>Error Code</th>
-                    <th>Meaning</th>
+                    <th>Champ</th>
+                    <th>Type</th>
+                    <th>Description</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>X000</td>
+                    <td>clé_api</td>
+                    <td>String</td>
+                    <td>Ta clé de l'API.</td>
+                </tr>
+                <tr>
+                    <td>nomObjet</td>
+                    <td>String</td>
+                    <td>le nom de l'objet</td>
+                </tr>
+                <tr>
+                    <td>Lieu</td>
+                    <td>String</td>
+                    <td>lieu de perte ou trouvé</td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td>String</td>
                     <td>
-                        Some parameters are missing. This error appears when you don't pass every mandatory parameters.
+                        la date de perte ou trouvé 
                     </td>
                 </tr>
                 <tr>
-                    <td>X001</td>
+                    <td>Description</td>
+                    <td>String</td>
+                    <td>la description de l'objet</td>
+                </tr>
+                <tr>
+                    <td>Photo</td>
+                    <td>file</td>
+                    <td>une image de l'objet</td>
+                </tr>
+                    <tr>
+                    <td>Categorie</td>
+                    <td>String</td>
+                    <td>la Categorie de l'objet</td>
+                    </tr>
+                    <tr><td>NomDoc</td><td>String</td><td>le nom du Document</td></tr>
+                    <tr><td>Marque</td><td>String</td><td>la marque de l'objet</td></tr>
+                    <tr><td>Modele</td><td>String</td><td>le modele de l'objet</td></tr>
+                    <tr><td>UserNom</td><td>String</td><td>le nom de celui qui décalre l'objet</td></tr>
+                    <tr><td>UserPrenom</td><td>String</td><td>le prenom de celui qui décalre l'objet</td></tr>
+                    <tr><td>Nationalite</td><td>String</td><td>la nationalite sur le document</td></tr>
+                    <tr><td> DateNaissance</td><td>String</td><td>le date de naissance sur le document</td></tr>
+                    <tr><td>UserPrenom</td><td>String</td><td>le prenom de celui qui décalre l'objet</td></tr>
+                </tbody>
+            </table>
+            <p> 
+                Pour obtenir la liste de tout les Objets, vous devez envoyer une requête GET avec l'url suivante:<br>
+                <code class="higlighted break-word">https://freelost-api.kouelab.com/object/all</code><br> 
+            </p>
+            <p> 
+                Pour supprimer un objet de la liste, vous devez envoyer une requête DELETE avec l'url suivante:<br>
+                <code class="higlighted break-word">https://freelost-api.kouelab.com/object/clear</code><br> 
+            </p>
+            <p> 
+                Pour qu'un moderateur verifier et valider la déclaration d'un utilisateur, il doit envoyer une requête PATCH avec l'url suivante:<br>
+                <code class="higlighted break-word">https://freelost-api.kouelab.com/object/edit/:idObject</code><br> 
+            </p>
+        </div>
+
+        <div class="overflow-hidden content-section" id="errors">
+            <h2>Les Erreurs</h2>
+            <p>
+                Freelost utilise les codes d'érreurs suivants:
+            </p>
+            <table>
+                <thead>
+                <tr>
+                    <th>Code d'Erreur</th>
+                    <th>Signification</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>ECONNREFUSED</td>
                     <td>
-                        Unknown or unvalid <code class="higlighted">secret_key</code>. This error appears if you use an unknow API key or if your API key expired.
+                        Erreur de connexion au serveur en ligne.
                     </td>
                 </tr>
                 <tr>
-                    <td>X002</td>
+                    <td>ENOTFOUND</td>
                     <td>
-                        Unvalid <code class="higlighted">secret_key</code> for this domain. This error appears if you use an  API key non specified for your domain. Developper or Universal API keys doesn't have domain checker.
-                    </td>
-                </tr>
-                <tr>
-                    <td>X003</td>
-                    <td>
-                        Unknown or unvalid user <code class="higlighted">token</code>. This error appears if you use an unknow user <code class="higlighted">token</code> or if the user <code class="higlighted">token</code> expired.
+                        La connexion avec le serveur en ligne a été coupée.
                     </td>
                 </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
-    <div class="content-code"></div>
-</div>
-<!-- Github Corner Ribbon - to remove (Ribbon created with : http://tholman.com/github-corners/ )-->
-
-<!-- END Github Corner Ribbon - to remove -->
 <script src="js/script.js"></script>
 </body>
 </html>
