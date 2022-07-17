@@ -3,6 +3,8 @@ const {
   allObject,
   deleteObjectById,
   objectUpdate,
+  findTrouverValider,
+  findObjectPerdu,
 } = require("../queries/object.queries");
 const path = require("path");
 const multer = require("multer");
@@ -86,6 +88,41 @@ exports.updateObject = async (req, res, next) => {
       object,
     });
   } catch (e) {
+    next(e);
+  }
+};
+exports.trouverValider = async (req, res, next) => {
+  try {
+    const object = await findTrouverValider();
+    res.status(200).json({
+      object,
+    });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
+exports.trouverNonValider = async (req, res, next) => {
+  try {
+    const object = await findTrouverNonValider();
+    res.status(200).json({
+      object,
+    });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
+exports.objectPerdu = async (req, res, next) => {
+  try {
+    const object = await findObjectPerdu();
+    res.status(200).json({
+      object,
+    });
+  } catch (e) {
+    console.log(e);
     next(e);
   }
 };

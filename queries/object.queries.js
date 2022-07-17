@@ -37,3 +37,44 @@ exports.getObjectBycategory = async (category) => {
     throw e;
   }
 };
+exports.findTrouverValider = async () => {
+  try {
+    const object = await Object.find({ valider: "oui", statut: "trouver" });
+    return object;
+  } catch (e) {
+    throw e;
+  }
+};
+exports.findTrouverNonValider = async () => {
+  try {
+    const object = await Object.find({ valider: "non", statut: "trouver" });
+    return object;
+  } catch (e) {
+    throw e;
+  }
+};
+exports.findObjectPerdu = async () => {
+  try {
+    const object = await Object.find({ statut: "perdu" });
+    return object;
+  } catch (e) {
+    throw e;
+  }
+};
+
+exports.findMyObjects = async (idUser) => {
+  try {
+    const object = await Object.find({ idUtilisateur: idUser });
+    return object;
+  } catch (e) {
+    throw e;
+  }
+};
+exports.findMyObjectsValidate = async (idUser) => {
+  try {
+    const object = await Object.find({ idModerateur: idUser });
+    return object;
+  } catch (e) {
+    throw e;
+  }
+};
