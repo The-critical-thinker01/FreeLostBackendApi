@@ -78,3 +78,11 @@ exports.findMyObjectsValidate = async (idUser) => {
     throw e;
   }
 };
+exports.findAllValiderObject = async () => {
+  try {
+    const object = await Object.find({ valider: "oui" });
+    return object;
+  } catch (e) {
+    throw e;
+  }
+};

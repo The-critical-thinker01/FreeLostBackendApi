@@ -13,7 +13,16 @@ app.on("addObject", async (object) => {
     const matchPublication = []; //on cree un tableau qui va contenir les objets qui ont presques les memes carracterisques que l'objet qui vient d'etre poster et qui ont des satuts different de celui qui vient d'etre poster
     if (objetFilter.length > 0) {
       objetFilter.forEach((element) => {
-        const { nomObjet, Lieu, Description, NomDoc, Modele, Marque } = element;
+        const {
+          nomObjet,
+          Lieu,
+          Description,
+          TypeDoc,
+          Modele,
+          Marque,
+          DateNaissance,
+          UserNom,
+        } = element;
         const text1 =
           nomObjet +
           " " +
@@ -21,11 +30,15 @@ app.on("addObject", async (object) => {
           " " +
           Description +
           " " +
-          NomDoc +
+          TypeDoc +
           " " +
           Modele +
           " " +
           Marque +
+          " " +
+          DateNaissance +
+          " " +
+          UserNom +
           " "; //je veut utiliser ses element pour chercher avec
         const text2 =
           object.nomObjet +
@@ -34,12 +47,16 @@ app.on("addObject", async (object) => {
           " " +
           object.Description +
           " " +
-          object.NomDoc +
+          object.TypeDoc +
           " " +
           object.Modele +
           " " +
           object.Marque +
-          " ";
+          " " +
+          object.DateNaissance +
+          " " +
+          object.UserNom +
+          " "; //je veut utiliser ses element pour chercher avec
         const tab1 = text1.split(" "); //je transforme les element en tableau
         const tab2 = text2.split(" ");
         const tab3 = tab1.filter((el) => tab2.includes(el)); //je filtre le tableau pour ne garder que les element qui sont dans le tableau 2
@@ -69,20 +86,20 @@ app.on("addObject", async (object) => {
                 "Un correspondant trouver pour l'objet " +
                 object.nomObjet +
                 " " +
-                object.NomDoc +
+                object.TypeDoc +
                 " " +
                 object.Marque +
                 " " +
                 object.Modele,
               html: `<h1>Bonjour ${user1.username}</h1>
                      <p>Un potentiel proprietaire à ete trouver recement pour l'objet que vous 
-                     avez poster sur la  plateForme freeLost</p>
-                     
+                     avez poster sur la  plateForme FreeLost</p>
+                     <br>
                      <p>Voici les informations laisser par le potentiel proprietaire </p>
                      <p>Nom de l'objet : ${
                        element.nomObjet +
                        " " +
-                       element.NomDoc +
+                       element.TypeDoc +
                        " " +
                        element.Marque +
                        " " +
@@ -97,13 +114,16 @@ app.on("addObject", async (object) => {
                        <img src="https://freelost-api.kouelab.com/${
                          element.Photo
                        }" alt="image object"/> </p>
-                       
-                       <p>Conseil de la communauter FreeLost</p>
+                     <br>
+                       <p>Conseils de la communauter FreeLost</p>
                        <ul>
-                       <li>Pour la restitution de l'object veillez toujours le faire dans les endroit public</li>
-                       <li>Signaler directement a la communauter freelost losque vous etes menace</li>
+                       <li>Pour la restitution de l'object , toujours le faire dans les endroit public </li>
+                       <li>Signaler directement a la communauter freelost losque vous etes menace </li>
+                       <li>soyez prudent !, freeLost n'est en aucun cas responsable de tous cequi pourait
+                        vous arrivez lors d'une rencontre avec un autre membre</li>
                        </ul>
-                       <p>Cordialement FreeLost @copyrigth 2022</p>`,
+                          <br>
+                       <p>Cordialement FreeLost ©Copyright 2022,tout droit reserve .</p>`,
               replyTo: "",
 
               onError: (e) => console.log(e),
@@ -120,20 +140,20 @@ app.on("addObject", async (object) => {
                 "Votre objet a été trouver  " +
                 object.nomObjet +
                 " " +
-                object.NomDoc +
+                object.TypeDoc +
                 " " +
                 object.Marque +
                 " " +
                 object.Modele,
               html: `<h1>Bonjour ${user2.username}</h1>
-                     <p>Un potentiel objet à ete trouver recement pour l'objet que vous 
+                     <p>Un potentiel objet à ete trouvé recement pour l'objet que vous 
                      avez poster comme perdu sur la  plateForme freeLost</p>
-                     
+                     <br>
                      <p>Voici les informations laisser par celui qui la  </p>
                      <p>Nom de l'objet : ${
                        object.nomObjet +
                        " " +
-                       object.NomDoc +
+                       object.TypeDoc +
                        " " +
                        object.Marque +
                        " " +
@@ -148,14 +168,17 @@ app.on("addObject", async (object) => {
                        <img src="https://freelost-api.kouelab.com/${
                          object.Photo
                        }" alt="image object"/> </p>
-                       
+                       <br>
                        <p>Conseil de la communauter FreeLost</p>
                        <ul>
                        <li>etre respectuer losque vous contacter la personne qui a retrouver votre objet</li>
                        <li>Pour la restitution de l'object veillez toujours le faire dans les endroit public</li>
                        <li>Signaler directement a la communauter freelost losque vous etes menace</li>
+                      <li>soyez prudent !, freeLost n'est en aucun cas responsable de tous cequi pourait
+                        vous arrivez lors d'une rencontre avec un autre membre</li>
                        </ul>
-                       <p>Cordialement FreeLost @copyrigth 2022</p>`,
+                          <br>
+                       <p>Cordialement FreeLost ©Copyright 2022,tout droit reserve .</p>`,
               replyTo: "",
 
               onError: (e) => console.log(e),
@@ -176,20 +199,21 @@ app.on("addObject", async (object) => {
                 "Votre objet a ete trouvé " +
                 object.nomObjet +
                 " " +
-                object.NomDoc +
+                object.TypeDoc +
                 " " +
                 object.Marque +
                 " " +
                 object.Modele,
               html: `<h1>Bonjour ${user1.username}</h1>
                      <p>Un potentiel objet à ete trouver recement pour l'objet que vous 
-                     avez poster comme perdu sur la  plateForme freeLost</p>
+                     avez signalé comme perdu sur la  plateForme freeLost</p>
                      
+                     <br>
                      <p>Voici les informations laisser par celui qui la retrouver </p>
                      <p>Nom de l'objet : ${
                        element.nomObjet +
                        " " +
-                       element.NomDoc +
+                       element.TypeDoc +
                        " " +
                        element.Marque +
                        " " +
@@ -204,13 +228,16 @@ app.on("addObject", async (object) => {
                        <img src="https://freelost-api.kouelab.com/${
                          element.Photo
                        }" alt="image object"/> </p>
-                       
+                       <br>
                        <p>Conseil de la communauter FreeLost</p>
                        <ul>
                        <li>Pour la restitution de l'object veillez toujours le faire dans les endroit public</li>
                        <li>Signaler directement a la communauter freelost losque vous etes menace</li>
+                       <li>soyez prudent !, freeLost n'est en aucun cas responsable de tous cequi pourait
+                        vous arrivez lors d'une rencontre avec un autre membre</li>
                        </ul>
-                       <p>Cordialement FreeLost @copyrigth 2022</p>`,
+                          <br>
+                       <p>Cordialement FreeLost ©Copyright 2022,tout droit reserve .</p>`,
               replyTo: "",
 
               onError: (e) => console.log(e),
@@ -227,20 +254,20 @@ app.on("addObject", async (object) => {
                 "Un potentiel proprietaire pour l'object que vous avez trouvé  " +
                 object.nomObjet +
                 " " +
-                object.NomDoc +
+                object.TypeDoc +
                 " " +
                 object.Marque +
                 " " +
                 object.Modele,
               html: `<h1>Bonjour ${user2.username}</h1>
                      <p></p>
-                     
+                     <br>
                      <p>Un potentiel proprietaire à ete trouver recement pour l'objet que vous 
                      avez poster sur la  plateForme freeLost  </p>
                      <p>Nom de l'objet : ${
                        object.nomObjet +
                        " " +
-                       object.NomDoc +
+                       object.TypeDoc +
                        " " +
                        object.Marque +
                        " " +
@@ -261,8 +288,11 @@ app.on("addObject", async (object) => {
                        <li>etre respectuer losque vous contacter la personne qui a retrouver votre objet</li>
                        <li>Pour la restitution de l'object veillez toujours le faire dans les endroit public</li>
                        <li>Signaler directement a la communauter freelost losque vous etes menace</li>
+                      <li>soyez prudent !, freeLost n'est en aucun cas responsable de tous cequi pourait
+                        vous arrivez lors d'une rencontre avec un autre membre</li>
                        </ul>
-                       <p>Cordialement FreeLost @copyrigth 2022</p>`,
+                          <br>
+                       <p>Cordialement FreeLost ©Copyright 2022,tout droit reservé.</p>`,
               replyTo: "",
 
               onError: (e) => console.log(e),
