@@ -5,6 +5,7 @@ const {
   objectUpdate,
   findTrouverValider,
   findObjectPerdu,
+  findAllValiderObject,
 } = require("../queries/object.queries");
 const path = require("path");
 const multer = require("multer");
@@ -118,6 +119,18 @@ exports.trouverNonValider = async (req, res, next) => {
 exports.objectPerdu = async (req, res, next) => {
   try {
     const object = await findObjectPerdu();
+    res.status(200).json({
+      object,
+    });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
+exports.findAllValider = async (req, res, next) => {
+  try {
+    const object = await findAllValiderObject();
     res.status(200).json({
       object,
     });

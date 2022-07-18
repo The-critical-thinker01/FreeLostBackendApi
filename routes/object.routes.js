@@ -9,6 +9,7 @@ const {
   updateObject,
   trouverNonValider,
   objectPerdu,
+  findAllValider,
 } = require("../controllers/object.controller");
 
 router.get("/all", getAllObjects);
@@ -23,4 +24,5 @@ router.patch("/edit/:ObjectId", updateObject);
 router.get("/trouverValider", trouverValider); //les object trouver et valider par un moderateur // vas etre afficher sur le home
 router.get("/trouverNonValider", trouverNonValider); //afficher les object non valider parle moderateur
 router.get("/objectPerdu", objectPerdu); //afficher les object perdu juste pr ladmin
+router.get("/allvalider", findAllValider); // affiche tous les objects valider
 module.exports = router;
