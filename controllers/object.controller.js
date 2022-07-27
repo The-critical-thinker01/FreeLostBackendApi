@@ -7,18 +7,7 @@ const {
   findObjectPerdu,
   findAllValiderObject,
 } = require("../queries/object.queries");
-const path = require("path");
-const multer = require("multer");
-const { app } = require("../app");
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/images/objects"));
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
-const upload = multer({ storage: storage });
+const cpUpload = require("../config/cloudinary.config");
 
 exports.getAllObjects = async (req, res, next) => {
   try {
@@ -44,12 +33,16 @@ exports.addNewObject = async (req, res, next) => {
 };
 
 exports.uploadImage = [
-  upload.single("object"),
+  cpUpload,
   async (req, res, next) => {
     try {
       // console.log(req.file);
       // console.log(req.body);
-      res.json({ path: "/images/objects/" + req.file.filename });
+      let images = "";
+      req.files.images.forEach((element) => {
+        images += element.path + " ";
+      });
+      res.json({ path: images });
     } catch (e) {
       res.json({ error: [e.message] });
       next(e);

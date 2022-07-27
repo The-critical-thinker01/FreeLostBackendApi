@@ -10,6 +10,7 @@ const cors = require("cors"); // pour permettre a mon backend d'accpeter les req
 require("./config/session.config");
 require("./config/passport.config");
 require("./config/mail.config");
+require("./config/cloudinary.config");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");

@@ -6,7 +6,11 @@ const ObjectSchema = new Schema({
   Lieu: { type: String },
   Date: { type: String },
   Description: { type: String },
-  Photo: { type: String, default: "/images/photo-non-disponible-1.png" },
+  Photo: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/dhv6exyaj/image/upload/v1658939240/freeLost/photo-non-disponible-1_ugwql2.png",
+  },
   Categorie: { type: String },
   TypeDoc: { type: String },
   Marque: { type: String },
