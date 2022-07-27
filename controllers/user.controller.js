@@ -10,17 +10,7 @@ const {
   findMyObjects,
   findMyObjectsValidate,
 } = require("../queries/object.queries");
-const path = require("path");
-const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../public/images/avatars"));
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
-const upload = multer({ storage: storage });
+const cpUpload = require("../config/cloudinary.config");
 
 exports.userCreate = async (req, res, next) => {
   const body = req.body;
@@ -33,12 +23,12 @@ exports.userCreate = async (req, res, next) => {
   }
 };
 exports.uploadImage = [
-  upload.single("avatar"),
+  cpUpload,
   async (req, res, next) => {
     try {
       // console.log(req.file);
       // console.log(req.body);
-      res.json({ path: "/images/avatars/" + req.file.filename });
+      res.json({ path: req.files.avatar[0].path });
     } catch (e) {
       res.json({ error: [e.message] });
       next(e);

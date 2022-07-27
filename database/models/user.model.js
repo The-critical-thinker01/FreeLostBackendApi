@@ -7,7 +7,11 @@ const userSchema = schema({
   email: { type: String, required: true, unique: true },
   password: { type: String },
   numero: { type: Number },
-  avatar: { type: String, default: "/images/profil.jpeg" },
+  avatar: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/dhv6exyaj/image/upload/v1658939222/freeLost/profil_keuq4s.jpg",
+  },
   googleId: { type: String },
   type: { type: String, default: "simple" },
   dateCreation: { type: Date },
